@@ -35,21 +35,16 @@ export default function Home() {
     <main className="min-h-screen relative overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 bg-red-500"></div>
 
-      <div className="absolute inset-0 bg-white hidden md:block" style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}></div>
+      <div className="absolute inset-0 bg-white" style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}></div>
 
       <div
-        className="absolute bg-gray-700 hidden md:block"
+        className="absolute inset-0 bg-gray-700"
         style={{
-          width: '141.42%',
-          height: '80px',
-          transform: 'rotate(30deg)',
-          transformOrigin: 'top left',
-          top: '0',
-          left: '0',
+          clipPath: 'polygon(0 0, 100% calc(100% - 80px), 100% 100%, 0 80px)'
         }}
       ></div>
 
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px] z-10">
+      <div className="absolute -bottom-10 -right-10 md:-bottom-20 md:-right-20 w-[400px] h-[400px] md:w-[800px] md:h-[800px] z-10">
         <Image
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg"
           alt="Pikachu"

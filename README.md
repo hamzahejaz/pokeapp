@@ -20,52 +20,46 @@ A modern, fully-featured Pokedex application built with Next.js 15, TypeScript, 
 
 ## Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 15 (App Router with Server Components)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
-- **Testing**: Jest + React Testing Library
+- **Testing**: Jest + React Testing Library (67 tests)
 - **Documentation**: Storybook
-- **API**: PokeAPI (REST)
-- **HTTP Client**: Axios
+- **API**: PokeAPI (REST) via custom API routes
+- **HTTP Client**: Native fetch with Next.js caching
+
+## Architecture & Approach
+
+**Server Components First**: Pokemon detail pages use Server Components for server-side data fetching, improving performance and SEO.
+
+**API Routes as Proxy**: Custom Next.js API routes (`/api/pokemon`, `/api/pokemon-species`, `/api/evolution-chain`) centralize external API calls with 1-hour caching strategy.
+
+**Component Architecture**: Two-tier system - `common/` for primitives (Button, Input), `compound/` for feature components (SearchForm, StatsTab).
+
+**Progressive Enhancement**: Skeleton loaders for images, responsive design (mobile-first), error boundaries for graceful failures.
 
 ## Project Structure
 
 ```
 pokemon-app/
 ├── app/
-│   ├── layout.tsx              # Root layout
-│   ├── page.tsx                # Home page with search
-│   ├── not-found.tsx           # 404 error page
-│   └── pokemon/[id]/
-│       └── page.tsx            # Pokemon detail page
+│   ├── api/                    # API routes (proxy to PokeAPI)
+│   │   ├── pokemon/[id]/
+│   │   ├── pokemon-species/[id]/
+│   │   └── evolution-chain/[id]/
+│   ├── pokemon/[id]/
+│   │   ├── page.tsx            # Server Component
+│   │   ├── loading.tsx         # Loading state
+│   │   └── error.tsx           # Error boundary
+│   └── page.tsx                # Home with search
 ├── components/
-│   ├── common/                 # Primitive components
-│   │   ├── Badge/
-│   │   ├── Button/
-│   │   ├── Card/
-│   │   ├── ErrorBoundary/
-│   │   ├── Input/
-│   │   ├── Spinner/
-│   │   ├── StatBar/
-│   │   └── Tabs/
-│   └── compound/               # Composed components
-│       ├── EvolutionsTab/
-│       ├── PokemonCard/
-│       ├── SearchForm/
-│       ├── StatsTab/
-│       └── TypeBadges/
-├── hooks/
-│   ├── usePokemon.ts          # Fetch single Pokemon
-│   ├── usePokemonSearch.ts    # Search Pokemon
-│   └── useEvolutions.ts       # Fetch evolution chain
+│   ├── common/                 # Reusable primitives
+│   └── compound/               # Feature components
 ├── lib/
-│   ├── pokeapi.ts             # PokeAPI REST client
-│   ├── constants.ts           # Type colors and mappings
-│   └── utils.ts               # Helper functions
-├── types/
-│   └── index.ts               # TypeScript interfaces
-└── __tests__/                 # Test files
-
+│   ├── pokeapi.ts             # API client
+│   ├── api-utils.ts           # Shared API utilities
+│   └── utils.ts               # Helpers
+└── __tests__/                 # Jest tests
 ```
 
 ## Getting Started

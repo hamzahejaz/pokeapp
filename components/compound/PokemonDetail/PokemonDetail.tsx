@@ -37,7 +37,7 @@ export function PokemonDetail({ pokemon, species, description }: PokemonDetailPr
 
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
-      <div className="pt-8 px-6 pb-6">
+      <div className="pt-10 pb-5 pl-[5%] md:pl-[7%] lg:pl-[14%] xl:pl-[18%]">
         <BackButton onClick={() => router.push('/')} />
       </div>
 

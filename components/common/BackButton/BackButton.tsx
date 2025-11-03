@@ -7,7 +7,7 @@ export interface BackButtonProps {
 }
 
 export function BackButton({ href = '/', onClick, className = '' }: BackButtonProps) {
-  const baseClasses = 'text-white text-5xl hover:opacity-80 transition-opacity';
+  const baseClasses = 'text-white text-6xl hover:opacity-80 transition-opacity';
   const combinedClasses = `${baseClasses} ${className}`;
 
   if (onClick) {
